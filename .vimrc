@@ -24,6 +24,7 @@ Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'kana/vim-operator-user'
 Plugin 'rhysd/vim-clang-format'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -48,12 +49,16 @@ set expandtab                                         "将Tab键转换为空格
 set tabstop=2                                         "设置Tab键的宽度，可以更改，如：宽度为2
 set shiftwidth=2                                      "换行时自动缩进宽度，可更改（宽度同tabstop）
 set smarttab                                          "指定按一次backspace就删除shiftwidth宽度
-set mouse=ar
+set mouse=a
 set selectmode+=mouse
 "set foldenable                                        "启用折叠
 "set foldmethod=indent                                 "indent 折叠方式
 "
 "
+set nowrap                                            "设置不自动换行
+set shortmess=atI                                     "去掉欢迎界面<F12>
+set ignorecase                                        "搜索模式里忽略大小写
+set smartcase                                         "如果搜索模式包含大写字符，不使用 'ignorecase' 选项，只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用
 "
 "let g:miniBufExplMapWindowNavVim = 1   
 "let g:miniBufExplMapWindowNavArrows = 1   
@@ -82,7 +87,7 @@ set laststatus=2
 
 
 let g:tagbar_ctags_bin='ctags'      "ctags程序的路径
-let g:tagbar_width=30         "窗口宽度的设置
+let g:tagbar_width=35         "窗口宽度的设置
 "map <F3> :Tagbar<CR>
 map <F3> : 
 imap <F3> : 
@@ -126,7 +131,7 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
  set completeopt=menuone,menu
 "
-"
+
 
 let Tlist_Ctags_Cmd='ctags' "因为我们放在环境变量里，所以可以直接执行
 let Tlist_Use_Right_Window=0 "让窗口显示在右边，0的话就是显示在左边
@@ -162,9 +167,10 @@ let Tlist_Auto_Open=1
 
 map<c-k> :ClangFormat<cr> 
 
-let g:clang_format#code_style='google'
+let g:clang_format#code_style='Google'
+let g:clang_format#style_options = {
+            \ "Standard" : "C++11",
+            \ "Cpp11BracedListStyle" : "true"}
 
 
-
-
-
+set clipboard=unnamed
